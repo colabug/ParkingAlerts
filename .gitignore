@@ -4,3 +4,4 @@ out/*
 blah.*
 ParkingAlerts.iml
 .DS_Store
+local.properties
