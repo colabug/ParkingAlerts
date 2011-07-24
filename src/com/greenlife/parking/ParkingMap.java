@@ -24,6 +24,8 @@ public class ParkingMap extends MapActivity {
         // Get overlays and set image
         mapOverlays = mapView.getOverlays();
         createAlertOverlays();
+        createCarOverlays();
+    }
 
     private void createAlertOverlays() {
         // Create new alert & add to map
@@ -37,6 +39,19 @@ public class ParkingMap extends MapActivity {
         mapOverlays.add(parkingAlerts);
     }
 
+    private void createCarOverlays() {
+        // Note: Image obtained from http://gettyicons.com/free-icon/108/transport2-icon-set/free-cabriolet-red-icon-png/
+        // License: Commercial Use Allowed, Back Link Required
+        Drawable drawable = this.getResources().getDrawable(R.drawable.car_marker);
+
+        // Create new alert & add to map
+        CarOverlay cars = new CarOverlay(drawable, this);
+        GeoPoint point = new GeoPoint(35410000, 139460000);
+        OverlayItem overlayItem = new OverlayItem(point, "Sekai, konichiwa!", "I'm in Japan!");
+
+        // Add car to map and overlay list
+        cars.addOverlay(overlayItem);
+        mapOverlays.add(cars);
     }
 
     @Override

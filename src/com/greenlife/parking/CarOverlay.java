@@ -8,43 +8,43 @@ import com.google.android.maps.OverlayItem;
 
 import java.util.ArrayList;
 
-public class AlertOverlay extends ItemizedOverlay {
+public class CarOverlay extends ItemizedOverlay {
+    // Stores parked cars
+    private ArrayList<OverlayItem> cars = new ArrayList<OverlayItem>();
 
-    // Holds parking alerts
-    private ArrayList<OverlayItem> alerts = new ArrayList<OverlayItem>();
     private Context mContext;
 
-    // Creates an alert with a default marker.
-    public AlertOverlay(Drawable defaultMarker) {
+    // Creates a car with a default marker.
+    public CarOverlay(Drawable defaultMarker) {
         super(boundCenterBottom(defaultMarker));
     }
 
-    // Creates an alert with a default marker & context.
-    public AlertOverlay(Drawable defaultMarker, Context context) {
+    // Creates an car with a default marker & context.
+    public CarOverlay(Drawable defaultMarker, Context context) {
         super(boundCenterBottom(defaultMarker));
         mContext = context;
     }
 
-    // Adds overlay and prepare it for drawing.
+    // Adds overlay and prepares them for drawing.
     public void addOverlay(OverlayItem overlay) {
-        alerts.add(overlay);
+        cars.add(overlay);
         populate();
     }
 
     @Override
     protected OverlayItem createItem(int i) {
-        return alerts.get(i);
+        return cars.get(i);
     }
 
     @Override
     public int size() {
-        return alerts.size();
+        return cars.size();
     }
 
     @Override
     protected boolean onTap(int index) {
         // Get the tapped item
-        OverlayItem item = alerts.get(index);
+        OverlayItem item = cars.get(index);
 
         // Build an interactive dialog
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
