@@ -1,6 +1,7 @@
 package com.greenlife.parking;
 
 import android.graphics.drawable.Drawable;
+import android.location.Address;
 import com.google.android.maps.*;
 import android.os.Bundle;
 
@@ -8,10 +9,27 @@ import java.util.List;
 
 public class ParkingMap extends MapActivity
 {
+    // Constants
+    private static final int PHILADELPHIA_LATITIUDE = 39952222;
+    private static final int PHILADELPHIA_LONGITUDE = -75164166;
+    private static final int CAR_LATITIUDE          = 39945017;
+    private static final int CAR_LONGITUDE          = -75175881;
+    private static final int ALERT_LATITIUDE        = 39943000;
+    private static final int ALERT_LONGITUDE        = -75174835;
 
+    // Map
     private MapView       mapView;
+    private MapController mapController;
     private List<Overlay> mapOverlays;
-    private AlertOverlay  parkingAlerts;
+
+    // Alerts
+    private AlertOverlay parkingAlerts;
+    private Drawable     alertMarker;
+
+    // Cars
+    private CarOverlay cars;
+    private Drawable   carMarker;
+
 
     @Override
     public void onCreate( Bundle savedInstanceState )
@@ -23,6 +41,13 @@ public class ParkingMap extends MapActivity
         mapView = (MapView) findViewById( R.id.mapview );
         mapView.setBuiltInZoomControls( true );
 
+        // Set initial zoom & location
+        mapController = mapView.getController();
+        mapController.animateTo( new GeoPoint( PHILADELPHIA_LATITIUDE,
+                                               PHILADELPHIA_LONGITUDE ) );
+        mapController.setZoom( 16 );
+        mapView.invalidate();
+
         // Get overlays and set image
         mapOverlays = mapView.getOverlays();
         createAlertOverlays();
@@ -32,15 +57,15 @@ public class ParkingMap extends MapActivity
     private void createAlertOverlays()
     {
         // Create new alert & add to map
-        Drawable drawable = this.getResources().getDrawable( R.drawable.androidmarker );
-        parkingAlerts = new AlertOverlay( drawable, this );
-        GeoPoint point = new GeoPoint( 19240000, -99120000 );
-        OverlayItem overlayItem = new OverlayItem( point,
-                                                   "Hola, Mundo!",
-                                                   "I'm in Mexico City!" );
+        alertMarker = this.getResources().getDrawable( R.drawable.androidmarker );
+        parkingAlerts = new AlertOverlay( alertMarker, this );
+        GeoPoint point = new GeoPoint( ALERT_LATITIUDE, ALERT_LONGITUDE );
+        OverlayItem alert = new OverlayItem( point,
+                                             "I'm an alert",
+                                             "... in your neighborhood!" );
 
         // Add alert to map and overlay list
-        parkingAlerts.addOverlay( overlayItem );
+        parkingAlerts.addOverlay( alert );
         mapOverlays.add( parkingAlerts );
     }
 
@@ -48,17 +73,17 @@ public class ParkingMap extends MapActivity
     {
         // Note: Image obtained from http://gettyicons.com/free-icon/108/transport2-icon-set/free-cabriolet-red-icon-png/
         // License: Commercial Use Allowed, Back Link Required
-        Drawable drawable = this.getResources().getDrawable( R.drawable.car_marker );
+        carMarker = this.getResources().getDrawable( R.drawable.car_marker );
 
         // Create new alert & add to map
-        CarOverlay cars = new CarOverlay( drawable, this );
-        GeoPoint point = new GeoPoint( 35410000, 139460000 );
-        OverlayItem overlayItem = new OverlayItem( point,
-                                                   "Sekai, konichiwa!",
-                                                   "I'm in Japan!" );
+        cars = new CarOverlay( carMarker, this );
+        GeoPoint point = new GeoPoint( CAR_LATITIUDE, CAR_LONGITUDE );
+        OverlayItem car = new OverlayItem( point,
+                                           "I'm a car",
+                                           "... on your block!" );
 
         // Add car to map and overlay list
-        cars.addOverlay( overlayItem );
+        cars.addOverlay( car );
         mapOverlays.add( cars );
     }
 
