@@ -3,16 +3,20 @@ package com.greenlife.parking;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.MotionEvent;
+import android.widget.Toast;
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 import java.util.ArrayList;
 
 public class AlertOverlay extends ItemizedOverlay
 {
-
     // Holds parking alerts
     private ArrayList<OverlayItem> alerts = new ArrayList<OverlayItem>();
+
     private Context mContext;
 
     // Creates an alert with a default marker.
@@ -28,7 +32,7 @@ public class AlertOverlay extends ItemizedOverlay
         mContext = context;
     }
 
-    // Adds overlay and prepare it for drawing.
+    // Adds overlay and prepares it for drawing.
     public void addOverlay( OverlayItem overlay )
     {
         alerts.add( overlay );
@@ -53,12 +57,28 @@ public class AlertOverlay extends ItemizedOverlay
         // Get the tapped item
         OverlayItem item = alerts.get( index );
 
-        // Build an interactive dialog
-        AlertDialog.Builder dialog = new AlertDialog.Builder( mContext );
-        dialog.setTitle( item.getTitle() );
-        dialog.setMessage( item.getSnippet() );
-        dialog.show();
+        Toast.makeText( mContext,
+                        item.getTitle() + " " +
+                        item.getSnippet(),
+                        Toast.LENGTH_SHORT ).show();
 
         return true;
     }
+
+    @Override
+    public boolean onTouchEvent( MotionEvent event, MapView mapView )
+    {
+        if ( event.getAction() == MotionEvent.ACTION_UP )
+        {
+            GeoPoint point = mapView.getProjection()
+                                    .fromPixels( (int) event.getX(),
+                                                 (int) event.getY() );
+            Toast.makeText( mContext,
+                            point.getLatitudeE6() / 1E6 + "," +
+                            point.getLongitudeE6() / 1E6,
+                            Toast.LENGTH_SHORT ).show();
+        }
+        return false;
+    }
 }
+
