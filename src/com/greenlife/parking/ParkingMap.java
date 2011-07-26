@@ -1,17 +1,23 @@
 package com.greenlife.parking;
 
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.os.Bundle;
 
 import com.google.android.maps.*;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class ParkingMap extends MapActivity
 {
     // Constants
+    private static final String TAG = ParkingMap.class.getSimpleName();
     private static final int PHILADELPHIA_LATITIUDE = 39952222;
     private static final int PHILADELPHIA_LONGITUDE = -75164166;
     private static final int CAR_LATITIUDE          = 39945017;
@@ -54,6 +60,40 @@ public class ParkingMap extends MapActivity
         mapOverlays = mapView.getOverlays();
         createAlertOverlays();
         createCarOverlays();
+
+        // Search for and navigate to a searched for point on the map
+        String searchString = "Fairmount Park, Philadelphia, PA";
+        GeoPoint point = getLocationForAddress( searchString );
+
+        if ( point != null )
+        {
+            Log.d( TAG, "point = " + point );
+            mapController.animateTo( point );
+            mapView.invalidate();
+        }
+    }
+
+    private GeoPoint getLocationForAddress( String searchString )
+    {
+        Log.d( TAG, "Searching for: " + searchString );
+        Geocoder geoCoder = new Geocoder( this, Locale.getDefault() );
+        try
+        {
+            List<Address> addresses;
+            addresses = geoCoder.getFromLocationName( searchString, 5 );
+
+            if ( addresses.size() > 0 )
+            {
+                return new GeoPoint((int) ( addresses.get( 0 ).getLatitude()  * 1E6 ),
+                                    (int) ( addresses.get( 0 ).getLongitude() * 1E6 ) );
+            }
+        }
+        catch ( IOException exception)
+        {
+            exception.printStackTrace();
+        }
+
+        return null;
     }
 
     private void createAlertOverlays()
