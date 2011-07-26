@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+                android:id="@+id/location"
+                android:icon="@drawable/compass"
+                android:title="Current Location"
+                android:showAsAction="always"/>
+
+        <item
+                android:id="@+id/cars"
+                android:icon="@drawable/car_marker"
+                android:title="Cars"
+                android:showAsAction="always"/>
+
+        <item
+                android:id="@+id/favorites"
+                android:icon="@android:drawable/star_off"
+                android:title="Favorite locations"
+                android:showAsAction="always"/>
+    </group>
+</menu>

@@ -1,9 +1,11 @@
 package com.greenlife.parking;
 
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import com.google.android.maps.*;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.os.Bundle;
+
+import com.google.android.maps.*;
 
 import java.util.List;
 
@@ -91,5 +93,14 @@ public class ParkingMap extends MapActivity
     protected boolean isRouteDisplayed()
     {
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu )
+    {
+        super.onCreateOptionsMenu( menu );
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate( R.menu.menu, menu );
+        return true;
     }
 }
