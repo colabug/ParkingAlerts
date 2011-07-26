@@ -1,32 +1,23 @@
 package com.greenlife.parking;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
-import com.google.android.maps.ItemizedOverlay;
+
 import com.google.android.maps.OverlayItem;
 
 import java.util.ArrayList;
 
-public class CarOverlay extends ItemizedOverlay
+public class CarOverlay extends BaseOverlay
 {
     // Stores parked cars
     private ArrayList<OverlayItem> cars = new ArrayList<OverlayItem>();
 
-    private Context mContext;
-
-    // Creates a car with a default marker.
-    public CarOverlay( Drawable defaultMarker )
-    {
-        super( boundCenterBottom( defaultMarker ) );
-    }
 
     // Creates an car with a default marker & context.
     public CarOverlay( Drawable defaultMarker, Context context )
     {
-        super( boundCenterBottom( defaultMarker ) );
-        mContext = context;
+        super( defaultMarker, context );
     }
 
     // Adds overlay and prepare it for drawing.
@@ -55,7 +46,7 @@ public class CarOverlay extends ItemizedOverlay
         OverlayItem item = cars.get( index );
 
         // Build an interactive dialog
-        Toast.makeText( mContext,
+        Toast.makeText( super.getContext(),
                         item.getTitle() + " " +
                         item.getSnippet(),
                         Toast.LENGTH_SHORT ).show();
