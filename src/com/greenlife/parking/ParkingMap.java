@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.os.Bundle;
 
+import android.view.MenuItem;
+import android.widget.Toast;
 import com.google.android.maps.*;
 
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class ParkingMap extends MapActivity
 {
     // Constants
     private static final String TAG = ParkingMap.class.getSimpleName();
+
     private static final int PHILADELPHIA_LATITIUDE = 39952222;
     private static final int PHILADELPHIA_LONGITUDE = -75164166;
     private static final int CAR_LATITIUDE          = 39945017;
@@ -88,7 +91,7 @@ public class ParkingMap extends MapActivity
                                     (int) ( addresses.get( 0 ).getLongitude() * 1E6 ) );
             }
         }
-        catch ( IOException exception)
+        catch ( IOException exception )
         {
             exception.printStackTrace();
         }
@@ -132,6 +135,31 @@ public class ParkingMap extends MapActivity
     @Override
     protected boolean isRouteDisplayed()
     {
+        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected( MenuItem item )
+    {
+        switch ( item.getItemId() )
+        {
+            case R.id.favorites:
+                Toast.makeText( this,
+                                "Menu: Favorites",
+                                Toast.LENGTH_SHORT ).show();
+                break;
+
+            case R.id.cars:
+                Toast.makeText( this,
+                                "Menu: Cars",
+                                Toast.LENGTH_SHORT ).show();
+                break;
+            case R.id.location:
+                Toast.makeText( this,
+                                "Menu: Location",
+                                Toast.LENGTH_SHORT ).show();
+                break;
+        }
         return false;
     }
 
