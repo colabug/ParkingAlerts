@@ -18,8 +18,7 @@ public class ParkingMap extends MapActivity
     private static final String TAG = ParkingMap.class.getSimpleName();
 
     // Constants
-    private static final int    DEFAULT_ZOOM_LEVEL    = 16;
-    private static final String defaultLocationString = "Rittenhouse Square, Philadelphia, PA";
+    private static final int DEFAULT_ZOOM_LEVEL = 16;
 
     // Map
     private MapView       mapView;
@@ -67,7 +66,7 @@ public class ParkingMap extends MapActivity
 
         // Show starting map location & set zoom
         mapController.setZoom( DEFAULT_ZOOM_LEVEL );
-        showCurrentLocation();
+        focusMapViewOnCurrentLocation( getString( R.string.UNABLE_TO_FIND_DEFAULT_LOCATION_SHOW_DEFAULT ) );
 
         // Get overlays & refresh
         createAlertOverlays();
@@ -75,20 +74,37 @@ public class ParkingMap extends MapActivity
         mapView.invalidate();
     }
 
-    private void showCurrentLocation()
+    private void focusMapViewOnCurrentLocation( String errorMessage )
+    {
+        boolean success = focusOnCurrentLocation( true );
+        if ( !success )
+        {
+            Log.w( TAG, errorMessage );
+            Toast.makeText( this,
+                            errorMessage,
+                            Toast.LENGTH_SHORT ).show();
+        }
+    }
+
+    private boolean focusOnCurrentLocation( boolean useDefaultOnFailure )
     {
         GeoPoint currentLocation = myLocationOverlay.getMyLocation();
         if ( currentLocation != null )
         {
             mapView.getController().animateTo( currentLocation );
-            mapView.getController().setZoom( 10 );
+        }
+        else if ( useDefaultOnFailure )
+        {
+            Log.w( TAG, "Showing default location." );
+            MapUtilities.navigateToSearchedLocation( getString( R.string.DEFAULT_LOCATION_STRING ),
+                                                     this );
         }
         else
         {
-            Log.w( TAG, "Showing default location" );
-            MapUtilities.navigateToSearchedLocation( defaultLocationString,
-                                                     this );
+            return false;
         }
+
+        return true;
     }
 
     @Override
@@ -157,10 +173,9 @@ public class ParkingMap extends MapActivity
                                 "Menu: Cars",
                                 Toast.LENGTH_SHORT ).show();
                 break;
+
             case R.id.location:
-                Toast.makeText( this,
-                                "Menu: Location",
-                                Toast.LENGTH_SHORT ).show();
+                focusMapViewOnCurrentLocation( getString( R.string.UNABLE_TO_FIND_DEFAULT_LOCATION ) );
                 break;
         }
         return false;

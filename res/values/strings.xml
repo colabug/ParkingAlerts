@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Parking Alerts</string>
+
+    <!--Map defaults-->
+    <string name="DEFAULT_LOCATION_STRING">Rittenhouse Square, Philadelphia, PA</string>
+
+    <!--Location error messaging-->
+    <string name="UNABLE_TO_FIND_DEFAULT_LOCATION">Unable to find current location.</string>
+    <string name="UNABLE_TO_FIND_DEFAULT_LOCATION_SHOW_DEFAULT">Unable to find current location, showing default.</string>
 </resources>
