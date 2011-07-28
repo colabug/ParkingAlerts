@@ -15,8 +15,8 @@
 
         <item
                 android:id="@+id/favorites"
-                android:icon="@android:drawable/star_off"
-                android:title="Favorite locations"
+                android:icon="@drawable/favorite"
+                android:title="Favorite Locations"
                 android:showAsAction="always"/>
     </group>
 </menu>
