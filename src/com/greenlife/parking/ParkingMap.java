@@ -64,9 +64,13 @@ public class ParkingMap extends MapActivity
         createAlertOverlays();
         createCarOverlays();
 
-        // Search for and navigate to a searched for point on the map
-        String searchString = "Fairmount Park, Philadelphia, PA";
-        GeoPoint point = getLocationForAddress( searchString );
+        navigateToSearchedLocation( "Fairmount Park, Philadelphia, PA" );
+    }
+
+    // Searches for and navigates to a for a point on the map.
+    private void navigateToSearchedLocation( String locationString )
+    {
+        GeoPoint point = getLocationForAddress( locationString );
 
         if ( point != null )
         {

@@ -45,7 +45,7 @@ public class CarOverlay extends BaseOverlay
         // Get the tapped item
         OverlayItem item = cars.get( index );
 
-        // Show toast
+        // Build an interactive dialog
         Toast.makeText( super.getContext(),
                         item.getTitle() + " " +
                         item.getSnippet(),
