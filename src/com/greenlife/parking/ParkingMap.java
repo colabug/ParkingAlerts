@@ -1,8 +1,6 @@
 package com.greenlife.parking;
 
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,15 +10,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import com.google.android.maps.*;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 public class ParkingMap extends MapActivity
 {
     // Logging
     private static final String TAG = ParkingMap.class.getSimpleName();
-
 
     // Map
     private MapView       mapView;
@@ -55,44 +50,6 @@ public class ParkingMap extends MapActivity
         mapOverlays = mapView.getOverlays();
         createAlertOverlays();
         createCarOverlays();
-
-        navigateToSearchedLocation( "Fairmount Park, Philadelphia, PA" );
-    }
-
-    // Searches for and navigates to a for a point on the map.
-    private void navigateToSearchedLocation( String locationString )
-    {
-        GeoPoint point = getLocationForAddress( locationString );
-
-        if ( point != null )
-        {
-            Log.d( TAG, "point = " + point );
-            mapController.animateTo( point );
-            mapView.invalidate();
-        }
-    }
-
-    private GeoPoint getLocationForAddress( String searchString )
-    {
-        Log.d( TAG, "Searching for: " + searchString );
-        Geocoder geoCoder = new Geocoder( this, Locale.getDefault() );
-        try
-        {
-            List<Address> addresses;
-            addresses = geoCoder.getFromLocationName( searchString, 5 );
-
-            if ( addresses.size() > 0 )
-            {
-                return new GeoPoint((int) ( addresses.get( 0 ).getLatitude()  * 1E6 ),
-                                    (int) ( addresses.get( 0 ).getLongitude() * 1E6 ) );
-            }
-        }
-        catch ( IOException exception )
-        {
-            exception.printStackTrace();
-        }
-
-        return null;
     }
 
     private void createAlertOverlays()
@@ -168,5 +125,15 @@ public class ParkingMap extends MapActivity
         MenuInflater inflater = getMenuInflater();
         inflater.inflate( R.menu.menu, menu );
         return true;
+    }
+
+    public MapView getMapView()
+    {
+        return mapView;
+    }
+
+    public MapController getMapController()
+    {
+        return mapController;
     }
 }
