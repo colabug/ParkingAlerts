@@ -106,7 +106,7 @@ public class ParkingMap extends MapActivity
     private void createAlertOverlays()
     {
         // Create new alert & add to map
-        alertMarker = this.getResources().getDrawable( R.drawable.androidmarker );
+        alertMarker = this.getResources().getDrawable( R.drawable.alert_marker );
         parkingAlerts = new AlertOverlay( alertMarker, this );
         GeoPoint point = new GeoPoint( ALERT_LATITIUDE, ALERT_LONGITUDE );
         OverlayItem alert = new OverlayItem( point,
