@@ -18,15 +18,9 @@ import java.util.Locale;
 
 public class ParkingMap extends MapActivity
 {
-    // Constants
+    // Logging
     private static final String TAG = ParkingMap.class.getSimpleName();
 
-    private static final int PHILADELPHIA_LATITIUDE = 39952222;
-    private static final int PHILADELPHIA_LONGITUDE = -75164166;
-    private static final int CAR_LATITIUDE          = 39945017;
-    private static final int CAR_LONGITUDE          = -75175881;
-    private static final int ALERT_LATITIUDE        = 39943000;
-    private static final int ALERT_LONGITUDE        = -75174835;
 
     // Map
     private MapView       mapView;
@@ -54,8 +48,6 @@ public class ParkingMap extends MapActivity
 
         // Set initial zoom & location
         mapController = mapView.getController();
-        mapController.animateTo( new GeoPoint( PHILADELPHIA_LATITIUDE,
-                                               PHILADELPHIA_LONGITUDE ) );
         mapController.setZoom( 16 );
         mapView.invalidate();
 
@@ -108,7 +100,8 @@ public class ParkingMap extends MapActivity
         // Create new alert & add to map
         alertMarker = this.getResources().getDrawable( R.drawable.alert_marker );
         parkingAlerts = new AlertOverlay( alertMarker, this );
-        GeoPoint point = new GeoPoint( ALERT_LATITIUDE, ALERT_LONGITUDE );
+        GeoPoint point = new GeoPoint( TestCoordinates.ALERT_LATITIUDE,
+                                       TestCoordinates.ALERT_LONGITUDE );
         OverlayItem alert = new OverlayItem( point,
                                              "I'm an alert",
                                              "... in your neighborhood!" );
@@ -126,7 +119,8 @@ public class ParkingMap extends MapActivity
 
         // Create new alert & add to map
         cars = new CarOverlay( carMarker, this );
-        GeoPoint point = new GeoPoint( CAR_LATITIUDE, CAR_LONGITUDE );
+        GeoPoint point = new GeoPoint( TestCoordinates.CAR_LATITIUDE,
+                                       TestCoordinates.CAR_LONGITUDE );
         OverlayItem car = new OverlayItem( point,
                                            "I'm a car",
                                            "... on your block!" );
