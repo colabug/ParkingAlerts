@@ -17,10 +17,17 @@ public class ParkingMap extends MapActivity
     // Logging
     private static final String TAG = ParkingMap.class.getSimpleName();
 
+    // Constants
+    private static final int    DEFAULT_ZOOM_LEVEL    = 16;
+    private static final String defaultLocationString = "Rittenhouse Square, Philadelphia, PA";
+
     // Map
     private MapView       mapView;
     private MapController mapController;
     private List<Overlay> mapOverlays;
+
+    // Location
+    private MyLocationOverlay myLocationOverlay;
 
     // Alerts
     private AlertOverlay parkingAlerts;
@@ -35,21 +42,62 @@ public class ParkingMap extends MapActivity
     public void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.main );
+        Log.d( TAG, "onCreate" );
 
         // Create zoom-able map
+        setContentView( R.layout.main );
         mapView = (MapView) findViewById( R.id.mapview );
         mapView.setBuiltInZoomControls( true );
 
-        // Set initial zoom & location
+        // Get controller and overlays
         mapController = mapView.getController();
-        mapController.setZoom( 16 );
-        mapView.invalidate();
-
-        // Get overlays and set image
         mapOverlays = mapView.getOverlays();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Log.d( TAG, "onResume" );
+
+        // Show current location on the map
+        myLocationOverlay = new MyLocationOverlay( this, mapView );
+        myLocationOverlay.enableMyLocation();
+        mapOverlays.add( myLocationOverlay );
+
+        // Show starting map location & set zoom
+        mapController.setZoom( DEFAULT_ZOOM_LEVEL );
+        showCurrentLocation();
+
+        // Get overlays & refresh
         createAlertOverlays();
         createCarOverlays();
+        mapView.invalidate();
+    }
+
+    private void showCurrentLocation()
+    {
+        GeoPoint currentLocation = myLocationOverlay.getMyLocation();
+        if ( currentLocation != null )
+        {
+            mapView.getController().animateTo( currentLocation );
+            mapView.getController().setZoom( 10 );
+        }
+        else
+        {
+            Log.w( TAG, "Showing default location" );
+            MapUtilities.navigateToSearchedLocation( defaultLocationString,
+                                                     this );
+        }
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Log.d( TAG, "onPause" );
+
+        myLocationOverlay.disableMyLocation();
     }
 
     private void createAlertOverlays()
