@@ -13,7 +13,6 @@ public class CarOverlay extends BaseOverlay
     // Stores parked cars
     private ArrayList<OverlayItem> cars = new ArrayList<OverlayItem>();
 
-
     // Creates an car with a default marker & context.
     public CarOverlay( Drawable defaultMarker, Context context )
     {

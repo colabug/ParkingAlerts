@@ -70,7 +70,7 @@ public class ParkingMap extends MapActivity
 
         // Get overlays & refresh
         createAlertOverlays();
-        createCarOverlays();
+        createCarOverlay( "My car name" );
         mapView.invalidate();
     }
 
@@ -132,7 +132,7 @@ public class ParkingMap extends MapActivity
         mapOverlays.add( parkingAlerts );
     }
 
-    private void createCarOverlays()
+    private void createCarOverlay( String carName )
     {
         // Note: Image obtained from http://gettyicons.com/free-icon/108/transport2-icon-set/free-cabriolet-red-icon-png/
         // License: Commercial Use Allowed, Back Link Required
@@ -142,12 +142,12 @@ public class ParkingMap extends MapActivity
         cars = new CarOverlay( carMarker, this );
         GeoPoint point = new GeoPoint( TestCoordinates.CAR_LATITIUDE,
                                        TestCoordinates.CAR_LONGITUDE );
-        OverlayItem car = new OverlayItem( point,
-                                           "I'm a car",
-                                           "... on your block!" );
+        OverlayItem overlayItem = new OverlayItem( point,
+                                                   carName,
+                                                   "parked here!" );
 
         // Add car to map and overlay list
-        cars.addOverlay( car );
+        cars.addOverlay( overlayItem );
         mapOverlays.add( cars );
     }
 

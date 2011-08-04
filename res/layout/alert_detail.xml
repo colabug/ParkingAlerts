@@ -30,5 +30,3 @@
         style="@style/alert_body"
         android:text="@string/SAMPLE_ALERT_TEXT"/>
 </LinearLayout>
-
-
