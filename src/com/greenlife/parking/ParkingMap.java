@@ -18,7 +18,7 @@ public class ParkingMap extends MapActivity
     private static final String TAG = ParkingMap.class.getSimpleName();
 
     // Constants
-    private static final int DEFAULT_ZOOM_LEVEL = 16;
+    private static final int DEFAULT_ZOOM_LEVEL = 17;
 
     // Map
     private MapView       mapView;
