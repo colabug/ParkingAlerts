@@ -2,7 +2,14 @@
 <resources>
     <style name="alert_title" parent="H1">
         <item name="android:paddingTop">20dp</item>
-        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="alert_location" parent="BodyText">
+        <item name="android:textSize">11dp</item>
+        <item name="android:paddingBottom">20dp</item>
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingLeft">10dp</item>
     </style>

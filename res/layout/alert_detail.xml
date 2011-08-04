@@ -20,6 +20,7 @@
         android:id="@+id/alert_location_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/alert_location"
         android:text="@string/SAMPLE_ALERT_LOCATION"/>
 
     <!--Detail-->
