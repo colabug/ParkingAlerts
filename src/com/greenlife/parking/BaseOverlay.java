@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -18,6 +17,8 @@ import java.util.Locale;
 
 abstract public class BaseOverlay extends ItemizedOverlay
 {
+    // private static final String TAG = BaseOverlay.class.getSimpleName();
+
     private Context context;
 
     public BaseOverlay( Drawable defaultMarker, Context context )
@@ -35,22 +36,19 @@ abstract public class BaseOverlay extends ItemizedOverlay
         // Touch and release of a point
         if ( event.getAction() == MotionEvent.ACTION_UP )
         {
+            // TODO: Use this or delete it
+            // Although the functionality is cool, this is kinda slow
             // Get point clicked
-            GeoPoint point = mapView.getProjection()
-                                    .fromPixels( (int) event.getX(),
-                                                 (int) event.getY() );
+            // GeoPoint point = mapView.getProjection()
+            //                        .fromPixels( (int) event.getX(),
+            //                                     (int) event.getY() );
 
             // Decode point to an address string
-            String addressString = translatePointToAddress( point );
-            Toast.makeText( getContext(),
-                            addressString,
-                            Toast.LENGTH_SHORT ).show();
-            return true;
+            // String addressString = translatePointToAddress( point );
+            // Log.i( TAG, "Address translated to: " + addressString );
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
     private String translatePointToAddress( GeoPoint point )
@@ -63,7 +61,7 @@ abstract public class BaseOverlay extends ItemizedOverlay
         List<Address> addresses;
         try
         {
-            addresses = geoCoder.getFromLocation( point.getLatitudeE6()  / 1E6,
+            addresses = geoCoder.getFromLocation( point.getLatitudeE6() / 1E6,
                                                   point.getLongitudeE6() / 1E6,
                                                   1 );
         }
