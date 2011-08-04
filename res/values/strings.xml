@@ -8,4 +8,25 @@
     <!--Location error messaging-->
     <string name="UNABLE_TO_FIND_DEFAULT_LOCATION">Unable to find current location.</string>
     <string name="UNABLE_TO_FIND_DEFAULT_LOCATION_SHOW_DEFAULT">Unable to find current location, showing default.</string>
+
+    <!--TODO: Delete when we have real data-->
+    <string-array name="UNMATCHED_ALERTS">
+        <item>Unmatched Alert 1</item>
+        <item>Unmatched Alert 2</item>
+        <item>Unmatched Alert 3</item>
+        <item>Unmatched Alert 4</item>
+        <item>Unmatched Alert 5</item>
+    </string-array>
+    <string name="SAMPLE_ALERT_TITLE">2nd Street Festival</string>
+    <string name="SAMPLE_ALERT_LOCATION">2nd Street from Girard Avenue to Spring Garden Avenue</string>
+    <string name="SAMPLE_ALERT_TEXT">Traffic Advisory: 2nd Street Festival\n
+        Street Closures for Sunday, July 31, 2011\n
+        July 28, 2011\n
+        \nOn Sunday, July 31, 2011, the 2nd Street Festival will be held along 2nd Street in Northern Liberties.  The festival will necessitate the closure of 2nd Street, from Girard Avenue to Spring Garden Avenue.  The closures will begin at 8:00 AM for set-up and continue through the festival (12:00 PM till 11:00 PM) until the clean-up of the area is completed.  There will be police assigned to this event, but traffic in the area could be heavy at times, and drivers should expect delays.\n
+        \nCONTACT\n
+        Officer Name\n
+        Office of Media Relations\n
+        215.555.1234\n
+        police@phila.gov
+    </string>
 </resources>

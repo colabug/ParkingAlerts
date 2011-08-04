@@ -162,12 +162,12 @@ public class ParkingMap extends MapActivity
     {
         switch ( item.getItemId() )
         {
+            // Show unmatched alerts list
             case R.id.unmatched:
-                Toast.makeText( this,
-                                "Menu: Unmatched Alerts",
-                                Toast.LENGTH_SHORT ).show();
+                startActivity( UnmatchedAlertListActivity.createIntent( this ) );
                 break;
 
+            // Focus on current location
             case R.id.location:
                 focusMapViewOnCurrentLocation( getString( R.string.UNABLE_TO_FIND_DEFAULT_LOCATION ) );
                 break;

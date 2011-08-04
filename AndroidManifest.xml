@@ -34,6 +34,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".UnmatchedAlertListActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:label="Unmatched Alerts List">
+        </activity>
+
+        <activity
+            android:name=".AlertDetailActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:label="Alert Detail">
+        </activity>
+
         <uses-library android:name="com.google.android.maps"/>
     </application>
 </manifest>
