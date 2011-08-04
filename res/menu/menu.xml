@@ -8,15 +8,9 @@
                 android:showAsAction="always"/>
 
         <item
-                android:id="@+id/cars"
-                android:icon="@drawable/car_marker"
-                android:title="Cars"
-                android:showAsAction="always"/>
-
-        <item
-                android:id="@+id/favorites"
-                android:icon="@drawable/favorite"
-                android:title="Favorite Locations"
+                android:id="@+id/unmatched"
+                android:icon="@drawable/list_icon"
+                android:title="Unmatched Alerts"
                 android:showAsAction="always"/>
     </group>
 </menu>

@@ -162,15 +162,9 @@ public class ParkingMap extends MapActivity
     {
         switch ( item.getItemId() )
         {
-            case R.id.favorites:
+            case R.id.unmatched:
                 Toast.makeText( this,
-                                "Menu: Favorites",
-                                Toast.LENGTH_SHORT ).show();
-                break;
-
-            case R.id.cars:
-                Toast.makeText( this,
-                                "Menu: Cars",
+                                "Menu: Unmatched Alerts",
                                 Toast.LENGTH_SHORT ).show();
                 break;
 
