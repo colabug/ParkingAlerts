@@ -3,7 +3,7 @@
     <group>
         <item
                 android:id="@+id/location"
-                android:icon="@drawable/compass"
+                android:icon="@drawable/compass_icon"
                 android:title="Current Location"
                 android:showAsAction="always"/>
 
