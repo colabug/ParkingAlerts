@@ -1,5 +1,11 @@
 package com.greenlife.parking;
 
+/**
+ * Author: Corey Leigh Latislaw
+ * Date: 8/5/11
+ * Purpose:
+ */
+
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;

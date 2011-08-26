@@ -1,5 +1,11 @@
 package com.greenlife.parking;
 
+/**
+ * Author: Corey Leigh Latislaw
+ * Date: 8/5/11
+ * Purpose:
+ */
+
 public class TestCoordinates
 {
     static final int PHILADELPHIA_LATITIUDE = 39952222;
